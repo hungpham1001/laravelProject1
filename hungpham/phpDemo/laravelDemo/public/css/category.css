@@ -1,0 +1,33 @@
+.panel {
+    overflow: scroll;
+}
+
+.panel-body ul {
+    position: relative;
+    left: -20px;
+}
+
+.panel-body li {
+    position: relative;
+    left: 10px;
+    list-style: none;
+}
+
+#category {
+    margin: 0px 100px 0px 20px;
+    text-align: center;
+    min-height: 25px;
+    min-width: 200px
+}
+
+#categoryName {
+    margin: 0px 20px 0px 20px;
+}
+
+button[name="addCategory"] {
+    margin-top: 20px;
+}
+
+.table {
+    padding: 20px;
+}
