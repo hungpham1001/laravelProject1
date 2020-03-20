@@ -28,16 +28,17 @@
         <main class="col-md-9">
             <div class="row col-md-offset-2 col-md-8"><h5><b>Create category</b><br><hr></h5></div>
             <form class="row col-md-offset-2 col-md-8">
+                <input hidden value="" type="number" id='categoryId'>
                 Parent:
-                <select name="parent" id="category">
+                <select name="parent" id="parent">
                 <option disabled selected>--select--</option>
                 @foreach($arr['categories'] as $entity)
                     <option value="{{$entity->categories}}">{{$entity->categories}}</option>
                 @endforeach
                 </select>
                 Category:
-                <input type="text" id="categoryName">
-                <button type="button" name="addCategory" class="row col-md-offset-8 btn btn-info">Create/Save</button>
+                <input type="text" id="category">
+                <button type="button" name="addCategory" class="row col-md-offset-8 btn btn-info">Create</button>
             </form>
             <div style="margin-top: 30px;" class="row col-md-offset-2 col-md-8"><h5><b>List</b><br><hr></h5></div>
             <div class="table">
@@ -54,8 +55,8 @@
                         @foreach($arr['page'] as $entity)
                             <tr data-id='{{$entity->id}}'>
                                 <td>{{$entity->id}}</td>
-                                <td>{{$entity->categories}}</td>
-                                <td>{{$entity->parent}}</td>
+                                <td name="category">{{$entity->categories}}</td>
+                                <td name="parent">{{$entity->parent}}</td>
                                 <td>
                                     @if(count($entity->childs))
                                         @foreach($entity->childs as $child)
@@ -74,7 +75,6 @@
                 <td>{{$arr['page']->links()}}</td>
             </div>
         </main>
-        @include('layouts.update_modal')
         @include('layouts.delete_modal')
     <script type="text/javascript" src="{{asset('js/category.js')}}"></script>
     </body>

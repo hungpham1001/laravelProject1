@@ -43,20 +43,38 @@ class categoriesQuery extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $newCategory = new category;
-            $newCategory->parent = $request->input('parent');
-            $newCategory->categories = $request->input('categories');
-            $newCategory->save();
-            return response()->json([
-                'error'=> false,
-                'message'=>'Category saved'
-            ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'error'=> true,
-                'message'=>'Category already exist'
-            ], 422);
+        if(!empty($request->input('id'))){
+            try {
+                $category = category::find($request->input('id'));
+                $category->parent = $request->input('parent');
+                $category->categories = $request->input('categories');
+                $category->save();
+                return response()->json([
+                    'error' => false,
+                    'message'  => 'update success',
+                ], 200);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'error' => true,
+                    'message'  => 'Category already exist (update)',
+                ], 200);
+            }
+        } else{
+            try {
+                $newCategory = new category;
+                $newCategory->parent = $request->input('parent');
+                $newCategory->categories = $request->input('categories');
+                $newCategory->save();
+                return response()->json([
+                    'error'=> false,
+                    'message'=>'Category saved'
+                ], 200);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'error'=> true,
+                    'message'=>'Category already exist'
+                ], 422);
+            }
         }
     }
 
